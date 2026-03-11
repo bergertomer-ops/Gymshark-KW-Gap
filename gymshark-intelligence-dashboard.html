@@ -5,123 +5,124 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gymshark — Search Intelligence Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gs-black: #0A0A0A;
-    --gs-white: #F8F7F4;
-    --gs-teal: #00E5C9;
-    --gs-amber: #FFB800;
-    --gs-red: #FF4757;
-    --gs-purple: #9B5DE5;
-    --gs-blue: #4CC9F0;
-    --gs-muted: #8A8A8A;
-    --gs-border: rgba(255,255,255,0.08);
-    --gs-card: rgba(255,255,255,0.04);
-    --gs-card-hover: rgba(255,255,255,0.07);
-    --gs-gradient: linear-gradient(135deg, #00E5C9 0%, #4CC9F0 100%);
+    --sw-ink: #092540;
+    --sw-cobalt: #195AFE;
+    --sw-orange: #FF7A1A;
+    --sw-white: #FFFFFF;
+    --sw-slide-bg: #EEF2F8;
+    --sw-card-bg: #FFFFFF;
+    --sw-gray: #AAB2BA;
+    --sw-light-gray: #F7F7F8;
+    --sw-positive: #00CA9A;
+    --sw-negative: #FF326F;
+    --sw-amber: #FFB800;
+    --sw-dri: #0FBFE5;
+    --sw-border: rgba(9,37,64,0.10);
+    --font-heading: 'DM Sans', sans-serif;
+    --font-body: 'Roboto', sans-serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: var(--gs-black);
-    color: var(--gs-white);
-    font-family: 'Inter', sans-serif;
+    background: var(--sw-slide-bg);
+    color: var(--sw-ink);
+    font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.5;
     min-height: 100vh;
-    overflow-x: hidden;
   }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0,229,201,0.06) 0%, transparent 60%),
-                      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(76,201,240,0.04) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .app { position: relative; z-index: 1; }
 
   /* ─── HEADER ─────────────────────────────────────────── */
   header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 32px;
-    border-bottom: 1px solid var(--gs-border);
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--sw-border);
+    background: var(--sw-white);
     position: sticky;
     top: 0;
-    background: rgba(10,10,10,0.92);
-    backdrop-filter: blur(16px);
     z-index: 100;
+    box-shadow: 0 1px 4px rgba(9,37,64,0.06);
   }
 
   .logo-group {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
   }
 
-  .logo-shark {
-    width: 36px;
-    height: 36px;
-    background: var(--gs-gradient);
-    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-    flex-shrink: 0;
-  }
-
-  .logo-text {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
+  .sw-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
     font-weight: 800;
-    letter-spacing: -0.02em;
+    font-size: 17px;
+    color: var(--sw-cobalt);
+    letter-spacing: -0.01em;
   }
 
-  .logo-text span { color: var(--gs-teal); }
+  .sw-logo svg { width: 28px; height: 28px; }
+
+  .logo-divider {
+    width: 1px;
+    height: 22px;
+    background: var(--sw-border);
+  }
+
+  .client-label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--sw-ink);
+  }
 
   .header-meta {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 14px;
   }
 
   .data-badge {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-body);
     font-size: 11px;
-    color: var(--gs-teal);
-    background: rgba(0,229,201,0.08);
-    border: 1px solid rgba(0,229,201,0.2);
+    font-weight: 500;
+    color: var(--sw-cobalt);
+    background: rgba(25,90,254,0.07);
+    border: 1px solid rgba(25,90,254,0.18);
     padding: 4px 10px;
     border-radius: 4px;
+    letter-spacing: 0.03em;
   }
 
   .region-toggle {
     display: flex;
-    gap: 0;
-    background: var(--gs-card);
-    border: 1px solid var(--gs-border);
+    background: var(--sw-slide-bg);
+    border: 1px solid var(--sw-border);
     border-radius: 6px;
     overflow: hidden;
   }
 
   .region-btn {
-    padding: 6px 16px;
+    padding: 6px 14px;
     cursor: pointer;
     font-size: 12px;
     font-weight: 500;
-    color: var(--gs-muted);
+    color: var(--sw-gray);
     background: transparent;
     border: none;
-    transition: all 0.2s;
+    transition: all 0.18s;
+    font-family: var(--font-body);
   }
 
   .region-btn.active {
-    background: var(--gs-teal);
-    color: var(--gs-black);
+    background: var(--sw-cobalt);
+    color: #fff;
   }
 
   .refresh-btn {
@@ -130,66 +131,74 @@
     gap: 6px;
     padding: 6px 14px;
     background: transparent;
-    border: 1px solid var(--gs-border);
+    border: 1px solid var(--sw-border);
     border-radius: 6px;
-    color: var(--gs-muted);
+    color: var(--sw-gray);
     font-size: 12px;
     cursor: pointer;
-    transition: all 0.2s;
-    font-family: inherit;
+    transition: all 0.18s;
+    font-family: var(--font-body);
   }
 
-  .refresh-btn:hover { border-color: var(--gs-teal); color: var(--gs-teal); }
+  .refresh-btn:hover { border-color: var(--sw-cobalt); color: var(--sw-cobalt); }
   .refresh-btn svg { width: 13px; height: 13px; }
 
-  /* ─── SECTION NAV ──────────────────────────────────────── */
+  /* ─── NAV ─────────────────────────────────────────────── */
   .section-nav {
     display: flex;
-    gap: 0;
     padding: 0 32px;
-    border-bottom: 1px solid var(--gs-border);
+    background: var(--sw-white);
+    border-bottom: 1px solid var(--sw-border);
     overflow-x: auto;
   }
-
   .section-nav::-webkit-scrollbar { display: none; }
 
   .nav-tab {
-    padding: 14px 20px;
+    padding: 13px 20px;
     font-size: 12px;
     font-weight: 500;
-    color: var(--gs-muted);
+    font-family: var(--font-body);
+    color: var(--sw-gray);
     cursor: pointer;
-    border-bottom: 2px solid transparent;
+    border-bottom: 2.5px solid transparent;
     white-space: nowrap;
-    transition: all 0.2s;
-    letter-spacing: 0.04em;
+    transition: all 0.18s;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .nav-tab.active { color: var(--gs-white); border-bottom-color: var(--gs-teal); }
-  .nav-tab:hover:not(.active) { color: var(--gs-white); }
+  .nav-tab.active { color: var(--sw-cobalt); border-bottom-color: var(--sw-cobalt); }
+  .nav-tab:hover:not(.active) { color: var(--sw-ink); }
 
   .nav-num {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 18px; height: 18px;
-    background: var(--gs-card);
+    background: var(--sw-slide-bg);
     border-radius: 3px;
-    text-align: center;
-    line-height: 18px;
-    margin-right: 6px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--sw-gray);
+    flex-shrink: 0;
   }
 
-  .nav-tab.active .nav-num { background: var(--gs-teal); color: var(--gs-black); }
+  .nav-tab.active .nav-num {
+    background: var(--sw-cobalt);
+    color: #fff;
+  }
 
-  /* ─── MAIN ─────────────────────────────────────────── */
+  /* ─── MAIN ─────────────────────────────────────────────── */
   main { padding: 28px 32px 60px; max-width: 1440px; margin: 0 auto; }
 
-  .section-panel { display: none; animation: fadeIn 0.3s ease; }
+  .section-panel { display: none; animation: fadeIn 0.25s ease; }
   .section-panel.active { display: block; }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(6px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
@@ -198,102 +207,143 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
     gap: 20px;
     flex-wrap: wrap;
   }
 
   .section-title h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--sw-ink);
+    letter-spacing: -0.01em;
     margin-bottom: 4px;
   }
 
-  .section-title p { color: var(--gs-muted); font-size: 13px; }
+  .section-title p {
+    color: var(--sw-gray);
+    font-size: 12px;
+    font-family: var(--font-body);
+  }
 
-  /* ─── INSIGHT CARDS ────────────────────────────────────── */
+  /* ─── KPI CARDS ────────────────────────────────────────── */
   .insight-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .insight-card {
-    background: var(--gs-card);
-    border: 1px solid var(--gs-border);
-    border-radius: 10px;
+    background: var(--sw-card-bg);
+    border-radius: 8px;
     padding: 18px 20px;
     position: relative;
     overflow: hidden;
-    transition: all 0.2s;
+    box-shadow: 0 1px 4px rgba(9,37,64,0.07);
+    border-top: 3px solid transparent;
   }
 
-  .insight-card:hover { background: var(--gs-card-hover); }
-
-  .insight-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-  }
-
-  .insight-card.teal::before   { background: var(--gs-teal); }
-  .insight-card.amber::before  { background: var(--gs-amber); }
-  .insight-card.red::before    { background: var(--gs-red); }
-  .insight-card.purple::before { background: var(--gs-purple); }
-  .insight-card.blue::before   { background: var(--gs-blue); }
+  .insight-card.cobalt { border-top-color: var(--sw-cobalt); }
+  .insight-card.orange { border-top-color: var(--sw-orange); }
+  .insight-card.red    { border-top-color: var(--sw-negative); }
+  .insight-card.green  { border-top-color: var(--sw-positive); }
+  .insight-card.amber  { border-top-color: var(--sw-amber); }
 
   .insight-label {
     font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--gs-muted);
+    color: var(--sw-gray);
     margin-bottom: 8px;
+    font-family: var(--font-body);
   }
 
   .insight-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 28px;
+    font-family: var(--font-heading);
+    font-size: 30px;
     font-weight: 800;
     letter-spacing: -0.03em;
     margin-bottom: 4px;
+    color: var(--sw-ink);
   }
 
-  .insight-value.teal   { color: var(--gs-teal); }
-  .insight-value.amber  { color: var(--gs-amber); }
-  .insight-value.red    { color: var(--gs-red); }
-  .insight-value.purple { color: var(--gs-purple); }
+  .insight-value.cobalt { color: var(--sw-cobalt); }
+  .insight-value.orange { color: var(--sw-orange); }
+  .insight-value.red    { color: var(--sw-negative); }
+  .insight-value.green  { color: var(--sw-positive); }
 
-  .insight-sub { font-size: 12px; color: var(--gs-muted); }
+  .insight-sub {
+    font-size: 11px;
+    color: var(--sw-gray);
+    font-family: var(--font-body);
+    line-height: 1.4;
+  }
 
-  .insight-badge {
+  /* ─── INSIGHTS BOX ─────────────────────────────────────── */
+  .insights-box {
+    background: var(--sw-slide-bg);
+    border: 1.5px dashed var(--sw-cobalt);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-top: 20px;
+  }
+
+  .insights-header {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--sw-cobalt);
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .insights-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .insights-list li {
+    font-size: 12px;
+    color: var(--sw-ink);
+    font-family: var(--font-body);
+    line-height: 1.45;
+    list-style: none;
+    display: flex;
+    gap: 8px;
+  }
+
+  .insights-list li::before {
+    content: attr(data-n);
     display: inline-flex;
     align-items: center;
-    gap: 3px;
-    font-size: 11px;
-    padding: 2px 7px;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: var(--sw-cobalt);
+    color: #fff;
     border-radius: 3px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
   }
-
-  .badge-save   { background: rgba(0,229,201,0.1); color: var(--gs-teal); }
-  .badge-warn   { background: rgba(255,184,0,0.1); color: var(--gs-amber); }
-  .badge-danger { background: rgba(255,71,87,0.1); color: var(--gs-red); }
 
   /* ─── VIEW TABS ────────────────────────────────────────── */
   .view-tabs {
     display: flex;
     gap: 0;
-    background: var(--gs-card);
-    border: 1px solid var(--gs-border);
+    background: var(--sw-card-bg);
+    border: 1px solid var(--sw-border);
     border-radius: 8px;
     padding: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     width: fit-content;
+    box-shadow: 0 1px 3px rgba(9,37,64,0.05);
   }
 
   .view-tab {
@@ -302,42 +352,53 @@
     font-size: 12px;
     font-weight: 500;
     cursor: pointer;
-    color: var(--gs-muted);
-    transition: all 0.2s;
+    color: var(--sw-gray);
+    transition: all 0.18s;
     white-space: nowrap;
+    font-family: var(--font-body);
   }
 
-  .view-tab.active { background: rgba(255,255,255,0.08); color: var(--gs-white); }
+  .view-tab.active {
+    background: var(--sw-cobalt);
+    color: #fff;
+  }
+
+  /* ─── VIEW SUB ─────────────────────────────────────────── */
+  .view-sub { display: none; }
+  .view-sub.active { display: block; }
 
   /* ─── TABLE ────────────────────────────────────────────── */
   .table-wrap {
-    background: var(--gs-card);
-    border: 1px solid var(--gs-border);
-    border-radius: 10px;
+    background: var(--sw-card-bg);
+    border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 4px rgba(9,37,64,0.07);
+    border: 1px solid var(--sw-border);
   }
 
   .table-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--gs-border);
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--sw-border);
+    background: var(--sw-light-gray);
   }
 
   .table-header h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
+    font-family: var(--font-heading);
+    font-size: 12px;
     font-weight: 700;
+    color: var(--sw-ink);
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
 
   .table-count {
-    font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
-    color: var(--gs-muted);
+    color: var(--sw-gray);
+    font-family: var(--font-body);
   }
 
   table { width: 100%; border-collapse: collapse; }
@@ -346,90 +407,157 @@
     padding: 10px 16px;
     text-align: left;
     font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--gs-muted);
-    border-bottom: 1px solid var(--gs-border);
+    color: var(--sw-gray);
+    border-bottom: 1px solid var(--sw-border);
     white-space: nowrap;
+    background: var(--sw-white);
+    font-family: var(--font-body);
   }
 
-  tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s; }
+  tbody tr {
+    border-bottom: 1px solid rgba(9,37,64,0.05);
+    transition: background 0.12s;
+  }
   tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  tbody tr:hover { background: rgba(25,90,254,0.03); }
+  tbody tr:nth-child(even) { background: rgba(9,37,64,0.015); }
+  tbody tr:nth-child(even):hover { background: rgba(25,90,254,0.03); }
 
-  tbody td { padding: 11px 16px; font-size: 13px; vertical-align: middle; }
+  tbody td { padding: 11px 16px; font-size: 12px; vertical-align: middle; }
 
-  .kw-text { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--gs-white); }
-
-  .pos-pill {
-    display: inline-block;
-    width: 28px; height: 22px;
-    line-height: 22px;
-    text-align: center;
-    border-radius: 4px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
+  .kw-text {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sw-ink);
   }
 
-  .pos-1   { background: rgba(0,229,201,0.15); color: var(--gs-teal); }
-  .pos-2   { background: rgba(0,229,201,0.10); color: #80ffe9; }
-  .pos-3   { background: rgba(76,201,240,0.12); color: var(--gs-blue); }
-  .pos-mid { background: rgba(255,184,0,0.10); color: var(--gs-amber); }
-  .pos-low { background: rgba(255,71,87,0.10); color: var(--gs-red); }
+  /* ─── PILLS ─────────────────────────────────────────────── */
+  .pos-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 22px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: var(--font-heading);
+  }
 
+  .pos-1   { background: rgba(0,202,154,0.12); color: var(--sw-positive); }
+  .pos-2   { background: rgba(0,202,154,0.08); color: #009e75; }
+  .pos-3   { background: rgba(25,90,254,0.10); color: var(--sw-cobalt); }
+  .pos-mid { background: rgba(255,184,0,0.12); color: var(--sw-amber); }
+  .pos-low { background: rgba(255,50,111,0.10); color: var(--sw-negative); }
+
+  /* ─── BAR ───────────────────────────────────────────────── */
   .zero-bar { display: flex; align-items: center; gap: 8px; }
 
   .bar-track {
     flex: 1;
     height: 4px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(9,37,64,0.08);
     border-radius: 2px;
     min-width: 60px;
     max-width: 100px;
   }
 
-  .bar-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
-  .bar-teal   { background: var(--gs-teal); }
-  .bar-amber  { background: var(--gs-amber); }
-  .bar-red    { background: var(--gs-red); }
+  .bar-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
+  .bar-positive { background: var(--sw-positive); }
+  .bar-amber    { background: var(--sw-amber); }
+  .bar-negative { background: var(--sw-negative); }
+  .bar-cobalt   { background: var(--sw-cobalt); }
 
+  /* ─── TAGS ───────────────────────────────────────────────── */
   .tag {
     display: inline-block;
-    padding: 2px 7px;
+    padding: 2px 8px;
     border-radius: 3px;
     font-size: 10px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    font-family: var(--font-body);
   }
 
-  .tag-cannibal { background: rgba(255,71,87,0.12);  color: var(--gs-red); }
-  .tag-gap      { background: rgba(255,184,0,0.12);  color: var(--gs-amber); }
-  .tag-blind    { background: rgba(155,93,229,0.12); color: var(--gs-purple); }
-  .tag-save     { background: rgba(0,229,201,0.12);  color: var(--gs-teal); }
+  .tag-cannibal { background: rgba(255,50,111,0.1);  color: var(--sw-negative); }
+  .tag-gap      { background: rgba(255,184,0,0.12);  color: #a07000; }
+  .tag-blind    { background: rgba(25,90,254,0.10);  color: var(--sw-cobalt); }
+  .tag-save     { background: rgba(0,202,154,0.10);  color: var(--sw-positive); }
 
-  /* ─── ACTION BOX ───────────────────────────────────────── */
+  .insight-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+
+  .badge-save   { background: rgba(0,202,154,0.10); color: var(--sw-positive); }
+  .badge-warn   { background: rgba(255,184,0,0.10); color: #a07000; }
+  .badge-danger { background: rgba(255,50,111,0.10); color: var(--sw-negative); }
+
+  /* ─── SERP BADGES ──────────────────────────────────────── */
+  .serp-badge {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 1px;
+    background: rgba(9,37,64,0.07);
+    color: var(--sw-gray);
+    font-family: var(--font-body);
+  }
+  .serp-ai    { background: rgba(25,90,254,0.10);  color: var(--sw-cobalt); }
+  .serp-video { background: rgba(255,50,111,0.10); color: var(--sw-negative); }
+  .serp-pla   { background: rgba(255,184,0,0.12);  color: #a07000; }
+  .serp-paid  { background: rgba(0,202,154,0.10);  color: var(--sw-positive); }
+
+  /* ─── WEEK BADGE ───────────────────────────────────────── */
+  .week-badge {
+    font-size: 11px;
+    color: var(--sw-gray);
+    padding: 5px 12px;
+    background: var(--sw-card-bg);
+    border: 1px solid var(--sw-border);
+    border-radius: 6px;
+    font-family: var(--font-body);
+    white-space: nowrap;
+  }
+
+  /* ─── ACTION CARDS ──────────────────────────────────────── */
   .action-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 18px;
   }
 
   .action-card {
-    background: var(--gs-card);
-    border: 1px solid var(--gs-border);
-    border-radius: 10px;
+    background: var(--sw-card-bg);
+    border: 1px solid var(--sw-border);
+    border-radius: 8px;
     padding: 16px 18px;
     display: flex;
     gap: 14px;
     align-items: flex-start;
-    transition: all 0.2s;
+    transition: all 0.18s;
+    box-shadow: 0 1px 3px rgba(9,37,64,0.05);
   }
 
-  .action-card:hover { border-color: rgba(255,255,255,0.15); background: var(--gs-card-hover); }
+  .action-card:hover {
+    border-color: var(--sw-cobalt);
+    box-shadow: 0 2px 8px rgba(25,90,254,0.1);
+  }
 
   .action-icon {
     width: 36px; height: 36px;
@@ -439,163 +567,285 @@
     justify-content: center;
     font-size: 16px;
     flex-shrink: 0;
+    background: rgba(25,90,254,0.08);
   }
 
-  .icon-teal   { background: rgba(0,229,201,0.12); }
-  .icon-amber  { background: rgba(255,184,0,0.12); }
-  .icon-red    { background: rgba(255,71,87,0.12); }
-  .icon-purple { background: rgba(155,93,229,0.12); }
+  .icon-cobalt  { background: rgba(25,90,254,0.08); }
+  .icon-orange  { background: rgba(255,122,26,0.08); }
+  .icon-green   { background: rgba(0,202,154,0.08); }
+  .icon-red     { background: rgba(255,50,111,0.08); }
 
-  .action-content h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; font-family: 'Syne', sans-serif; }
-  .action-content p  { font-size: 12px; color: var(--gs-muted); line-height: 1.5; }
+  .action-content h4 {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-family: var(--font-heading);
+    color: var(--sw-ink);
+  }
 
-  /* ─── TWO COL LAYOUT ───────────────────────────────────── */
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .action-content p {
+    font-size: 12px;
+    color: var(--sw-gray);
+    line-height: 1.5;
+    font-family: var(--font-body);
+  }
+
+  /* ─── TWO-COL ────────────────────────────────────────────── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
   @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
 
-  /* ─── COMPETITOR TILE ──────────────────────────────────── */
+  /* ─── COMPETITOR TILES ──────────────────────────────────── */
   .comp-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     gap: 12px;
     margin-bottom: 20px;
   }
 
   .comp-tile {
-    background: var(--gs-card);
-    border: 1px solid var(--gs-border);
-    border-radius: 10px;
+    background: var(--sw-card-bg);
+    border: 1.5px solid var(--sw-border);
+    border-radius: 8px;
     padding: 16px;
-    transition: all 0.2s;
+    transition: all 0.18s;
     cursor: pointer;
+    box-shadow: 0 1px 3px rgba(9,37,64,0.05);
   }
 
-  .comp-tile.selected { border-color: var(--gs-teal); background: rgba(0,229,201,0.05); }
-  .comp-tile:hover:not(.selected) { background: var(--gs-card-hover); }
+  .comp-tile.selected {
+    border-color: var(--sw-cobalt);
+    background: rgba(25,90,254,0.03);
+    box-shadow: 0 2px 8px rgba(25,90,254,0.12);
+  }
+  .comp-tile:hover:not(.selected) { border-color: rgba(9,37,64,0.2); }
 
-  .comp-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
-  .comp-stat { display: flex; justify-content: space-between; font-size: 11px; color: var(--gs-muted); padding: 3px 0; }
-  .comp-stat-val { font-family: 'IBM Plex Mono', monospace; color: var(--gs-white); }
-  .comp-type { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; color: var(--gs-muted); }
+  .comp-type {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--sw-gray);
+    margin-bottom: 4px;
+    font-family: var(--font-body);
+    font-weight: 600;
+  }
 
-  /* ─── URL LIST ─────────────────────────────────────────── */
-  .url-list { display: flex; flex-direction: column; gap: 6px; }
+  .comp-name {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sw-ink);
+    margin-bottom: 10px;
+  }
+
+  .comp-stat {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--sw-gray);
+    padding: 3px 0;
+    font-family: var(--font-body);
+  }
+
+  .comp-stat-val {
+    font-weight: 600;
+    color: var(--sw-ink);
+    font-family: var(--font-heading);
+  }
+
+  /* ─── URL LIST ──────────────────────────────────────────── */
+  .url-list { display: flex; flex-direction: column; gap: 5px; }
 
   .url-item {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 14px;
-    background: var(--gs-card);
-    border: 1px solid var(--gs-border);
-    border-radius: 7px;
-    transition: all 0.2s;
+    padding: 9px 14px;
+    background: var(--sw-slide-bg);
+    border: 1px solid var(--sw-border);
+    border-radius: 6px;
+    transition: all 0.15s;
   }
 
-  .url-item:hover { background: var(--gs-card-hover); }
+  .url-item:hover { background: rgba(25,90,254,0.04); border-color: rgba(25,90,254,0.2); }
 
-  .url-rank  { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--gs-muted); width: 20px; flex-shrink: 0; }
-  .url-path  { flex: 1; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--gs-blue); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .url-kw    { font-size: 11px; color: var(--gs-muted); flex-shrink: 0; }
-  .url-share { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--gs-teal); flex-shrink: 0; }
+  .url-rank  { font-size: 11px; color: var(--sw-gray); width: 20px; flex-shrink: 0; font-weight: 700; }
+  .url-path  { flex: 1; font-size: 11px; color: var(--sw-cobalt); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-body); }
+  .url-kw    { font-size: 11px; color: var(--sw-gray); flex-shrink: 0; }
+  .url-share { font-size: 11px; color: var(--sw-ink); font-weight: 700; flex-shrink: 0; }
 
-  /* ─── ZERO CLICK ──────────────────────────────────── */
-  .kw-zero-grid { display: flex; flex-direction: column; gap: 8px; }
-
+  /* ─── ZERO CLICK ──────────────────────────────────────── */
   .kw-zero-item {
     display: grid;
-    grid-template-columns: 180px 1fr 90px 60px;
+    grid-template-columns: 180px 1fr 90px 70px;
     gap: 12px;
     align-items: center;
     padding: 10px 14px;
-    background: var(--gs-card);
-    border: 1px solid var(--gs-border);
-    border-radius: 7px;
-    transition: all 0.2s;
+    background: var(--sw-slide-bg);
+    border: 1px solid var(--sw-border);
+    border-radius: 6px;
+    margin-bottom: 6px;
+    transition: all 0.15s;
   }
 
-  .kw-zero-item:hover { background: var(--gs-card-hover); }
+  .kw-zero-item:hover { background: rgba(25,90,254,0.04); border-color: rgba(25,90,254,0.2); }
 
   @media (max-width: 700px) {
-    .kw-zero-item { grid-template-columns: 1fr 60px; }
+    .kw-zero-item { grid-template-columns: 1fr 70px; }
     .kw-zero-item > *:nth-child(2), .kw-zero-item > *:nth-child(3) { display: none; }
   }
 
-  .kw-zero-name { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--gs-white); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .kw-zero-pct  { font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: right; }
-  .pct-high { color: var(--gs-red); }
-  .pct-mid  { color: var(--gs-amber); }
-  .pct-low  { color: var(--gs-teal); }
+  .kw-zero-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sw-ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--font-body);
+  }
 
-  /* ─── RISING ─────────────────────────────────────────── */
+  .kw-zero-pct  { font-size: 12px; text-align: right; font-weight: 700; font-family: var(--font-heading); }
+  .pct-high { color: var(--sw-negative); }
+  .pct-mid  { color: var(--sw-amber); }
+  .pct-low  { color: var(--sw-positive); }
+
+  /* ─── RISING ──────────────────────────────────────────── */
   .rising-item {
     display: flex;
     align-items: center;
     gap: 14px;
     padding: 12px 14px;
-    background: var(--gs-card);
-    border: 1px solid var(--gs-border);
-    border-radius: 7px;
+    background: var(--sw-slide-bg);
+    border: 1px solid var(--sw-border);
+    border-radius: 6px;
     margin-bottom: 6px;
-    transition: all 0.2s;
+    transition: all 0.15s;
   }
 
-  .rising-item:hover { background: var(--gs-card-hover); }
+  .rising-item:hover { background: rgba(25,90,254,0.04); border-color: rgba(25,90,254,0.2); }
 
-  .rising-rank-num { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--gs-border); width: 32px; flex-shrink: 0; text-align: right; }
+  .rising-rank-num {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 800;
+    color: rgba(9,37,64,0.12);
+    width: 30px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
   .rising-main { flex: 1; }
-  .rising-domain { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--gs-white); margin-bottom: 2px; }
-  .rising-kw { font-size: 11px; color: var(--gs-muted); }
-  .rising-change { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--gs-teal); }
-  .rising-vol { font-size: 10px; color: var(--gs-muted); font-family: 'IBM Plex Mono', monospace; }
-
-  /* ─── SERP BADGES ──────────────────────────────────── */
-  .serp-badge { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: 9px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; margin: 1px; background: rgba(255,255,255,0.07); color: var(--gs-muted); }
-  .serp-ai    { background: rgba(155,93,229,0.15);  color: var(--gs-purple); }
-  .serp-video { background: rgba(255,71,87,0.12);   color: #ff8a94; }
-  .serp-pla   { background: rgba(255,184,0,0.12);   color: var(--gs-amber); }
-  .serp-paid  { background: rgba(76,201,240,0.12);  color: var(--gs-blue); }
-
-  /* ─── WEEK BADGE ───────────────────────────────────────── */
-  .week-badge { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--gs-muted); padding: 5px 12px; background: var(--gs-card); border: 1px solid var(--gs-border); border-radius: 6px; }
-
-  /* ─── CREATIVE CARD ───────────────────────────────────── */
-  .creative-item { padding: 12px 14px; background: rgba(255,255,255,0.03); border-radius: 7px; border: 1px solid var(--gs-border); margin-bottom: 10px; }
-  .creative-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-  .creative-theme { font-size: 12px; font-weight: 600; font-family: 'Syne', sans-serif; }
-  .creative-copy  { font-size: 12px; color: var(--gs-muted); font-style: italic; }
+  .rising-domain { font-size: 12px; font-weight: 600; color: var(--sw-cobalt); margin-bottom: 2px; font-family: var(--font-body); }
+  .rising-kw { font-size: 11px; color: var(--sw-gray); }
+  .rising-change { font-family: var(--font-heading); font-size: 15px; font-weight: 800; color: var(--sw-positive); }
+  .rising-vol { font-size: 10px; color: var(--sw-gray); }
 
   /* ─── CHANNEL MIX ─────────────────────────────────────── */
   .ch-row { margin-bottom: 12px; }
-  .ch-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: var(--gs-muted); }
-  .ch-label span:last-child { font-family: 'IBM Plex Mono', monospace; color: var(--gs-white); }
-  .ch-track { width: 100%; height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; }
+  .ch-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: var(--sw-gray); font-family: var(--font-body); }
+  .ch-label span:last-child { font-weight: 700; color: var(--sw-ink); font-family: var(--font-heading); }
+  .ch-track { width: 100%; height: 5px; background: rgba(9,37,64,0.08); border-radius: 3px; }
   .ch-fill  { height: 100%; border-radius: 3px; }
 
-  /* ─── VIEW SUB ─────────────────────────────────────────── */
-  .view-sub { display: none; }
-  .view-sub.active { display: block; }
+  /* ─── CREATIVE CARD ──────────────────────────────────── */
+  .creative-item {
+    padding: 12px 14px;
+    background: var(--sw-slide-bg);
+    border-radius: 6px;
+    border: 1px solid var(--sw-border);
+    margin-bottom: 8px;
+  }
+
+  .creative-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  .creative-theme {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: var(--sw-ink);
+  }
+
+  .creative-copy { font-size: 12px; color: var(--sw-gray); font-style: italic; line-height: 1.4; }
+
+  /* ─── ZERO-CLICK TABLE HEADER ─────────────────────────── */
+  .zero-col-head {
+    display: grid;
+    grid-template-columns: 180px 1fr 90px 70px;
+    gap: 12px;
+    padding: 0 14px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sw-gray);
+    font-family: var(--font-body);
+  }
+
+  /* ─── FOOTER / BREADCRUMB ─────────────────────────────── */
+  .dash-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid var(--sw-border);
+    margin-top: 28px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .breadcrumb {
+    font-size: 10px;
+    font-family: var(--font-body);
+    color: var(--sw-gray);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .breadcrumb .link { color: var(--sw-cobalt); font-weight: 500; }
+
+  .footer-right {
+    font-size: 10px;
+    color: var(--sw-gray);
+    font-family: var(--font-body);
+  }
 
   /* ─── SPINNER ─────────────────────────────────────────── */
-  .spin { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(0,229,201,0.3); border-top-color: var(--gs-teal); border-radius: 50%; animation: spin 0.8s linear infinite; }
+  .spin {
+    display: inline-block;
+    width: 13px; height: 13px;
+    border: 2px solid rgba(25,90,254,0.2);
+    border-top-color: var(--sw-cobalt);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ─── FOOTER ─────────────────────────────────────────── */
-  .footnote { font-size: 11px; color: var(--gs-muted); padding-top: 12px; border-top: 1px solid var(--gs-border); margin-top: 28px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gs-teal); display: inline-block; }
 </style>
 </head>
 <body>
-<div class="app">
 
 <!-- HEADER -->
 <header>
   <div class="logo-group">
-    <div class="logo-shark"></div>
-    <div class="logo-text">GYMSHARK <span>/ SEARCH INTEL</span></div>
+    <!-- Similarweb wordmark -->
+    <div class="sw-logo">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="6" fill="#195AFE"/>
+        <path d="M8 20.5C8 20.5 11 14 16 14C21 14 24 20.5 24 20.5" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <path d="M8 16C8 16 11 11 16 11C21 11 24 16 24 16" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+      </svg>
+      Similarweb
+    </div>
+    <div class="logo-divider"></div>
+    <div class="client-label">Gymshark — Search Intelligence</div>
   </div>
   <div class="header-meta">
-    <div class="data-badge" id="week-label">WEEK: JAN 2026</div>
+    <div class="data-badge" id="week-label">JAN 2026</div>
     <div class="region-toggle">
       <button class="region-btn active" onclick="setRegion('uk', this)">🇬🇧 UK</button>
       <button class="region-btn" onclick="setRegion('us', this)">🇺🇸 US</button>
@@ -619,176 +869,437 @@
 <!-- MAIN -->
 <main>
 
-<!-- S1 -->
+<!-- ═══ SECTION 1 ════════════════════════════════════════════ -->
 <div id="s1" class="section-panel active">
   <div class="section-header">
     <div class="section-title">
-      <h2>SEO &amp; PPC Synergy — Keyword Gap</h2>
-      <p id="s1-sub">Identifying cannibalization, coverage gaps &amp; competitor blind spots · UK · Jan 2026</p>
+      <h2>SEO &amp; PPC Synergy — Keyword Gap Analysis</h2>
+      <p id="s1-sub">Identifying cannibalization, coverage gaps &amp; competitor blind spots · 🇬🇧 UK · Jan 2026</p>
     </div>
     <div class="week-badge" id="week-badge-s1">Sun 29 Dec – Sat 25 Jan</div>
   </div>
 
+  <!-- UK KPIs -->
   <div class="insight-row" id="s1-metrics-uk">
-    <div class="insight-card teal"><div class="insight-label">Budget Leak (Cannibalization)</div><div class="insight-value teal">12</div><div class="insight-sub">keywords Rank 1–3 organic + bidding unnecessarily</div></div>
-    <div class="insight-card amber"><div class="insight-label">Coverage Gaps</div><div class="insight-value amber">8</div><div class="insight-sub">paid active, organic unranked (pos 20+)</div></div>
-    <div class="insight-card red"><div class="insight-label">Competitor Blind Spots</div><div class="insight-value red">6</div><div class="insight-sub">rivals rank 1–5, Gymshark invisible in both</div></div>
-    <div class="insight-card purple"><div class="insight-label">Estimated Monthly Saving</div><div class="insight-value purple">~£4.2K</div><div class="insight-sub">if cannibalized spend redirected to gap terms</div></div>
+    <div class="insight-card cobalt">
+      <div class="insight-label">Budget Leak (Cannibalization)</div>
+      <div class="insight-value cobalt">12</div>
+      <div class="insight-sub">keywords Rank 1–3 organic + bidding unnecessarily</div>
+    </div>
+    <div class="insight-card amber">
+      <div class="insight-label">Coverage Gaps</div>
+      <div class="insight-value" style="color:var(--sw-amber)">8</div>
+      <div class="insight-sub">paid active, organic unranked (pos 20+)</div>
+    </div>
+    <div class="insight-card red">
+      <div class="insight-label">Competitor Blind Spots</div>
+      <div class="insight-value red">6</div>
+      <div class="insight-sub">rivals rank 1–5, Gymshark invisible in both</div>
+    </div>
+    <div class="insight-card green">
+      <div class="insight-label">Estimated Monthly Saving</div>
+      <div class="insight-value green">~£4.2K</div>
+      <div class="insight-sub">if cannibalized spend redirected to gap terms</div>
+    </div>
   </div>
 
+  <!-- US KPIs -->
   <div class="insight-row" id="s1-metrics-us" style="display:none">
-    <div class="insight-card teal"><div class="insight-label">Budget Leak (Cannibalization)</div><div class="insight-value teal">9</div><div class="insight-sub">keywords Rank 1–3 organic + bidding unnecessarily</div></div>
-    <div class="insight-card amber"><div class="insight-label">Coverage Gaps</div><div class="insight-value amber">11</div><div class="insight-sub">paid active, organic unranked (pos 20+)</div></div>
-    <div class="insight-card red"><div class="insight-label">Competitor Blind Spots</div><div class="insight-value red">7</div><div class="insight-sub">rivals rank 1–5, Gymshark invisible in both</div></div>
-    <div class="insight-card purple"><div class="insight-label">Estimated Monthly Saving</div><div class="insight-value purple">~$6.1K</div><div class="insight-sub">if cannibalized spend redirected to gap terms</div></div>
+    <div class="insight-card cobalt">
+      <div class="insight-label">Budget Leak (Cannibalization)</div>
+      <div class="insight-value cobalt">9</div>
+      <div class="insight-sub">keywords Rank 1–3 organic + bidding unnecessarily</div>
+    </div>
+    <div class="insight-card amber">
+      <div class="insight-label">Coverage Gaps</div>
+      <div class="insight-value" style="color:var(--sw-amber)">11</div>
+      <div class="insight-sub">paid active, organic unranked (pos 20+)</div>
+    </div>
+    <div class="insight-card red">
+      <div class="insight-label">Competitor Blind Spots</div>
+      <div class="insight-value red">7</div>
+      <div class="insight-sub">rivals rank 1–5, Gymshark invisible in both</div>
+    </div>
+    <div class="insight-card green">
+      <div class="insight-label">Estimated Monthly Saving</div>
+      <div class="insight-value green">~$6.1K</div>
+      <div class="insight-sub">if cannibalized spend redirected to gap terms</div>
+    </div>
   </div>
 
+  <!-- Sub-tabs -->
   <div class="view-tabs">
-    <div class="view-tab active" onclick="showView('s1v1', this)">🔴 Cannibalization</div>
-    <div class="view-tab" onclick="showView('s1v2', this)">🟡 Coverage Gaps</div>
-    <div class="view-tab" onclick="showView('s1v3', this)">🟣 Competitor Blind Spots</div>
+    <div class="view-tab active" onclick="showView('s1v1', this)">Cannibalization</div>
+    <div class="view-tab" onclick="showView('s1v2', this)">Coverage Gaps</div>
+    <div class="view-tab" onclick="showView('s1v3', this)">Competitor Blind Spots</div>
   </div>
 
+  <!-- v1: Cannibalization -->
   <div id="s1v1" class="view-sub active">
     <div class="table-wrap">
-      <div class="table-header"><h3>Cannibalization — Rank 1–3 Organic &amp; Active Paid Spend</h3><div class="table-count" id="cannibal-count">12 keywords</div></div>
-      <table><thead><tr><th>Keyword</th><th>Org Pos</th><th>Monthly Vol</th><th>CPC</th><th>Zero-Click%</th><th>SERP Features</th><th>Action</th></tr></thead><tbody id="cannibal-body"></tbody></table>
+      <div class="table-header">
+        <h3>Cannibalization — Rank 1–3 Organic &amp; Active Paid Spend</h3>
+        <div class="table-count" id="cannibal-count">12 keywords</div>
+      </div>
+      <table>
+        <thead><tr>
+          <th>Keyword</th><th>Org Pos</th><th>Monthly Vol</th><th>CPC</th>
+          <th>Zero-Click %</th><th>SERP Features</th><th>Recommendation</th>
+        </tr></thead>
+        <tbody id="cannibal-body"></tbody>
+      </table>
     </div>
     <div class="action-grid">
-      <div class="action-card"><div class="action-icon icon-teal">💰</div><div class="action-content"><h4>Pause Paid on Dominant Organics</h4><p>Keywords where Gymshark owns pos 1–2 with no AI Overview threat — paid spend is redundant. Estimated £2,800/mo recoverable budget.</p></div></div>
-      <div class="action-card"><div class="action-icon icon-amber">⚡</div><div class="action-content"><h4>Protect High-Zero-Click Terms Organically</h4><p>Face pulls &amp; rear delt terms have 80%+ zero-click rates — AI Overviews absorbing traffic. Prioritise featured snippet markup over PPC.</p></div></div>
+      <div class="action-card">
+        <div class="action-icon icon-cobalt">💰</div>
+        <div class="action-content">
+          <h4>Pause Paid on Dominant Organics</h4>
+          <p>Keywords where Gymshark owns pos 1–2 with no AI Overview threat — paid spend is redundant. Estimated £2,800/mo recoverable budget.</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-icon icon-orange">⚡</div>
+        <div class="action-content">
+          <h4>Protect High Zero-Click Terms Organically</h4>
+          <p>Face pulls &amp; rear delt terms have 80%+ zero-click rates — AI Overviews absorbing traffic. Prioritise featured snippet markup over PPC.</p>
+        </div>
+      </div>
+    </div>
+    <div class="insights-box">
+      <div class="insights-header">Insights</div>
+      <ul class="insights-list">
+        <li data-n="1"><span><strong>12 cannibalized keywords</strong> represent avoidable paid spend — organic dominance makes bidding redundant on these terms.</span></li>
+        <li data-n="2"><span>Redirecting ~£2,800/mo from cannibal terms to coverage gaps would improve blended search ROI significantly.</span></li>
+        <li data-n="3"><span>AI Overview presence on 3 cannibal terms suggests organic snippets may be at risk — monitor visibility weekly.</span></li>
+      </ul>
     </div>
   </div>
 
+  <!-- v2: Coverage Gaps -->
   <div id="s1v2" class="view-sub">
     <div class="table-wrap">
-      <div class="table-header"><h3>Coverage Gaps — Paid Active, Organic Unranked (Pos 20+)</h3><div class="table-count" id="gap-count">8 keywords</div></div>
-      <table><thead><tr><th>Keyword</th><th>Org Pos</th><th>Monthly Vol</th><th>CPC</th><th>Intent</th><th>SERP Features</th><th>Priority</th></tr></thead><tbody id="gap-body"></tbody></table>
+      <div class="table-header">
+        <h3>Coverage Gaps — Paid Active, Organic Unranked (Pos 20+)</h3>
+        <div class="table-count" id="gap-count">8 keywords</div>
+      </div>
+      <table>
+        <thead><tr>
+          <th>Keyword</th><th>Org Pos</th><th>Monthly Vol</th><th>CPC</th>
+          <th>Intent</th><th>SERP Features</th><th>Priority</th>
+        </tr></thead>
+        <tbody id="gap-body"></tbody>
+      </table>
     </div>
     <div class="action-grid">
-      <div class="action-card"><div class="action-icon icon-amber">📝</div><div class="action-content"><h4>Content Brief: Category Landing Pages</h4><p>Gymshark pays for "leggings", "sports bra", "gym sets" traffic but has no top-10 ranking. Build optimised PLP pages targeting transactional terms.</p></div></div>
-      <div class="action-card"><div class="action-icon icon-teal">🎯</div><div class="action-content"><h4>Defensive Paid Strategy Whilst SEO Builds</h4><p>Maintain paid on coverage gap terms 3–6 months whilst content and link acquisition drives organic up. Set automated position-based bid rules.</p></div></div>
+      <div class="action-card">
+        <div class="action-icon icon-orange">📝</div>
+        <div class="action-content">
+          <h4>Content Brief: Category Landing Pages</h4>
+          <p>Gymshark pays for "leggings", "sports bra", "gym sets" traffic but has no top-10 ranking. Build optimised PLP pages targeting transactional terms.</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-icon icon-cobalt">🎯</div>
+        <div class="action-content">
+          <h4>Defensive Paid Strategy Whilst SEO Builds</h4>
+          <p>Maintain paid on coverage gap terms 3–6 months whilst content and link acquisition drives organic up. Set automated position-based bid rules.</p>
+        </div>
+      </div>
+    </div>
+    <div class="insights-box">
+      <div class="insights-header">Insights</div>
+      <ul class="insights-list">
+        <li data-n="1"><span><strong>8 high-intent terms</strong> where Gymshark is paying for clicks but has no organic safety net below page 2.</span></li>
+        <li data-n="2"><span>Gap terms skew transactional — high commercial value, CPC above category average, strong conversion intent.</span></li>
+        <li data-n="3"><span>Building organic coverage on gap terms within 6 months could reduce paid dependency by an estimated 30–40%.</span></li>
+      </ul>
     </div>
   </div>
 
+  <!-- v3: Blind Spots -->
   <div id="s1v3" class="view-sub">
     <div class="table-wrap">
-      <div class="table-header"><h3>Competitor Blind Spots — Rivals Rank 1–5, Gymshark Invisible</h3><div class="table-count" id="blind-count">6 terms</div></div>
-      <table><thead><tr><th>Keyword</th><th>Leading Competitor</th><th>Their Org Pos</th><th>Monthly Vol</th><th>CPC</th><th>Gymshark Status</th><th>Opportunity</th></tr></thead><tbody id="blind-body"></tbody></table>
+      <div class="table-header">
+        <h3>Competitor Blind Spots — Rivals Rank 1–5, Gymshark Invisible</h3>
+        <div class="table-count" id="blind-count">6 terms</div>
+      </div>
+      <table>
+        <thead><tr>
+          <th>Keyword</th><th>Leading Competitor</th><th>Their Org Pos</th><th>Monthly Vol</th>
+          <th>CPC</th><th>Gymshark Status</th><th>Opportunity</th>
+        </tr></thead>
+        <tbody id="blind-body"></tbody>
+      </table>
     </div>
     <div class="action-grid">
-      <div class="action-card"><div class="action-icon icon-purple">🕵️</div><div class="action-content"><h4>Intercept via Paid Immediately</h4><p>Launch test campaigns on "flared leggings", "pilates socks" and "gym sets" — high commercial terms competitors dominate organically.</p></div></div>
-      <div class="action-card"><div class="action-icon icon-red">🏗️</div><div class="action-content"><h4>SEO Content Roadmap for Blind Spots</h4><p>These terms reveal audience appetite Gymshark isn't serving. Create dedicated landing pages with optimised content and internal linking structures.</p></div></div>
+      <div class="action-card">
+        <div class="action-icon icon-cobalt">🕵️</div>
+        <div class="action-content">
+          <h4>Intercept via Paid Immediately</h4>
+          <p>Launch test campaigns on "flared leggings", "pilates socks" and "gym sets" — high commercial terms competitors dominate organically.</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-icon icon-red">🏗️</div>
+        <div class="action-content">
+          <h4>SEO Content Roadmap for Blind Spots</h4>
+          <p>These terms reveal audience appetite Gymshark isn't serving. Create dedicated landing pages with optimised content and internal linking structures.</p>
+        </div>
+      </div>
+    </div>
+    <div class="insights-box">
+      <div class="insights-header">Insights</div>
+      <ul class="insights-list">
+        <li data-n="1"><span><strong>6 blind-spot terms</strong> where competitors dominate organically and Gymshark has zero presence paid or organic.</span></li>
+        <li data-n="2"><span>Tala, Adanola and Sweaty Betty are capturing high-value traffic Gymshark is entirely absent from — immediate paid interception warranted.</span></li>
+        <li data-n="3"><span>Collectively these terms represent ~80K monthly searches; entering even 3 would significantly expand total addressable search volume.</span></li>
+      </ul>
     </div>
   </div>
 </div>
 
-<!-- S2 -->
+<!-- ═══ SECTION 2 ════════════════════════════════════════════ -->
 <div id="s2" class="section-panel">
   <div class="section-header">
     <div class="section-title">
       <h2>Competitor Paid Strategy</h2>
-      <p id="s2-sub">Spend allocation, top paid landing pages &amp; ad creative signals · UK · Jan 2026</p>
+      <p id="s2-sub">Spend allocation, top paid landing pages &amp; ad creative signals · 🇬🇧 UK · Jan 2026</p>
     </div>
     <div class="week-badge">Jan 2026 data</div>
   </div>
 
-  <div class="comp-grid" id="comp-grid-uk">
-    <div class="comp-tile selected" onclick="selectComp('lululemon', this)"><div class="comp-type">Core Rival</div><div class="comp-name">Lululemon</div><div class="comp-stat"><span>Paid Vis.</span><span class="comp-stat-val">High</span></div><div class="comp-stat"><span>Top tactic</span><span class="comp-stat-val">Brand bidding</span></div></div>
-    <div class="comp-tile" onclick="selectComp('sweaty_betty', this)"><div class="comp-type">Core Rival</div><div class="comp-name">Sweaty Betty</div><div class="comp-stat"><span>Paid Vis.</span><span class="comp-stat-val">Medium</span></div><div class="comp-stat"><span>Top tactic</span><span class="comp-stat-val">Category terms</span></div></div>
-    <div class="comp-tile" onclick="selectComp('nike', this)"><div class="comp-type">Macro Brand</div><div class="comp-name">Nike</div><div class="comp-stat"><span>Paid Vis.</span><span class="comp-stat-val">Very High</span></div><div class="comp-stat"><span>Top tactic</span><span class="comp-stat-val">PLA / Shopping</span></div></div>
-    <div class="comp-tile" onclick="selectComp('adanola', this)"><div class="comp-type">Challenger</div><div class="comp-name">Adanola</div><div class="comp-stat"><span>Paid Vis.</span><span class="comp-stat-val">Rising</span></div><div class="comp-stat"><span>Top tactic</span><span class="comp-stat-val">Brand defence</span></div></div>
-    <div class="comp-tile" onclick="selectComp('fabletics', this)"><div class="comp-type">Core Rival</div><div class="comp-name">Fabletics</div><div class="comp-stat"><span>Paid Vis.</span><span class="comp-stat-val">Medium</span></div><div class="comp-stat"><span>Top tactic</span><span class="comp-stat-val">Membership offer</span></div></div>
+  <div class="comp-grid">
+    <div class="comp-tile selected" onclick="selectComp('lululemon', this)">
+      <div class="comp-type">Core Rival</div>
+      <div class="comp-name">Lululemon</div>
+      <div class="comp-stat"><span>Paid Vis.</span><span class="comp-stat-val">High</span></div>
+      <div class="comp-stat"><span>Top tactic</span><span class="comp-stat-val">Brand bidding</span></div>
+    </div>
+    <div class="comp-tile" onclick="selectComp('sweaty_betty', this)">
+      <div class="comp-type">Core Rival</div>
+      <div class="comp-name">Sweaty Betty</div>
+      <div class="comp-stat"><span>Paid Vis.</span><span class="comp-stat-val">Medium</span></div>
+      <div class="comp-stat"><span>Top tactic</span><span class="comp-stat-val">Category terms</span></div>
+    </div>
+    <div class="comp-tile" onclick="selectComp('nike', this)">
+      <div class="comp-type">Macro Brand</div>
+      <div class="comp-name">Nike</div>
+      <div class="comp-stat"><span>Paid Vis.</span><span class="comp-stat-val">Very High</span></div>
+      <div class="comp-stat"><span>Top tactic</span><span class="comp-stat-val">PLA / Shopping</span></div>
+    </div>
+    <div class="comp-tile" onclick="selectComp('adanola', this)">
+      <div class="comp-type">Challenger</div>
+      <div class="comp-name">Adanola</div>
+      <div class="comp-stat"><span>Paid Vis.</span><span class="comp-stat-val">Rising</span></div>
+      <div class="comp-stat"><span>Top tactic</span><span class="comp-stat-val">Brand defence</span></div>
+    </div>
+    <div class="comp-tile" onclick="selectComp('fabletics', this)">
+      <div class="comp-type">Core Rival</div>
+      <div class="comp-name">Fabletics</div>
+      <div class="comp-stat"><span>Paid Vis.</span><span class="comp-stat-val">Medium</span></div>
+      <div class="comp-stat"><span>Top tactic</span><span class="comp-stat-val">Membership offer</span></div>
+    </div>
   </div>
 
   <div class="two-col">
     <div>
       <div class="table-wrap">
-        <div class="table-header"><h3 id="comp-landing-title">Lululemon — Top 10 Paid Landing Pages (UK)</h3><div class="table-count">By traffic share</div></div>
+        <div class="table-header">
+          <h3 id="comp-landing-title">Lululemon — Top Paid Landing Pages</h3>
+          <div class="table-count">By traffic share</div>
+        </div>
         <div style="padding:12px 14px;" class="url-list" id="comp-landing-list"></div>
       </div>
     </div>
     <div>
-      <div class="table-wrap" style="margin-bottom:16px">
-        <div class="table-header"><h3 id="comp-creative-title">Ad Creative Signals — Last 30 Days</h3><div class="table-count">Key messaging themes</div></div>
-        <div style="padding: 16px;" id="comp-creative-content"></div>
+      <div class="table-wrap" style="margin-bottom:14px">
+        <div class="table-header">
+          <h3 id="comp-creative-title">Ad Creative Signals — Last 30 Days</h3>
+          <div class="table-count">Key messaging themes</div>
+        </div>
+        <div style="padding:14px;" id="comp-creative-content"></div>
       </div>
       <div class="table-wrap">
-        <div class="table-header"><h3>Paid Traffic Channel Mix</h3><div class="table-count">Estimated split</div></div>
-        <div style="padding: 16px 20px;" id="comp-channel-mix"></div>
+        <div class="table-header">
+          <h3>Paid Traffic Channel Mix</h3>
+          <div class="table-count">Estimated split</div>
+        </div>
+        <div style="padding:16px 20px;" id="comp-channel-mix"></div>
       </div>
     </div>
   </div>
 
   <div class="action-grid">
-    <div class="action-card"><div class="action-icon icon-teal">🎣</div><div class="action-content"><h4>Intercept Lululemon Homepage Traffic</h4><p>Lululemon's top paid destination is their homepage via brand terms. Gymshark already bids on "lululemon uk" — ensure landing pages directly address the quality/price comparison.</p></div></div>
-    <div class="action-card"><div class="action-icon icon-amber">🛍️</div><div class="action-content"><h4>PLA Expansion for Leggings &amp; Sets</h4><p>Nike and Lululemon heavy in PLA/Shopping for leggings. Gymshark should expand Shopping feed coverage — product titles and images are the primary differentiator.</p></div></div>
-    <div class="action-card"><div class="action-icon icon-purple">📣</div><div class="action-content"><h4>Counter Adanola's Rising Brand Paid SOV</h4><p>Adanola paid traffic up significantly on brand and adjacent terms. Consider retargeting audiences who visit Adanola with Gymshark comparison messaging.</p></div></div>
+    <div class="action-card">
+      <div class="action-icon icon-cobalt">🎣</div>
+      <div class="action-content">
+        <h4>Intercept Lululemon Homepage Traffic</h4>
+        <p>Lululemon's top paid destination is their homepage via brand terms. Gymshark already bids on "lululemon uk" — ensure landing pages directly address the quality/price comparison.</p>
+      </div>
+    </div>
+    <div class="action-card">
+      <div class="action-icon icon-orange">🛍️</div>
+      <div class="action-content">
+        <h4>PLA Expansion for Leggings &amp; Sets</h4>
+        <p>Nike and Lululemon heavy in PLA/Shopping for leggings. Gymshark should expand Shopping feed coverage — product titles and images are the primary differentiator.</p>
+      </div>
+    </div>
+    <div class="action-card">
+      <div class="action-icon icon-cobalt">📣</div>
+      <div class="action-content">
+        <h4>Counter Adanola's Rising Brand Paid SOV</h4>
+        <p>Adanola paid traffic up significantly on brand and adjacent terms. Consider retargeting audiences who visit Adanola with Gymshark comparison messaging.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="insights-box">
+    <div class="insights-header">Insights</div>
+    <ul class="insights-list">
+      <li data-n="1"><span>Lululemon allocates ~45% of paid to text ads — brand defence is their primary spend driver; Shopping supplements category capture.</span></li>
+      <li data-n="2"><span><strong>Adanola and AYBL</strong> are emerging threats on brand-adjacent paid terms — their SOV gains signal direct audience competition with Gymshark.</span></li>
+      <li data-n="3"><span>Fabletics' membership-led creative strategy drives high LTV acquisitions — Gymshark could test a similar retention-oriented paid creative angle.</span></li>
+    </ul>
   </div>
 </div>
 
-<!-- S3 -->
+<!-- ═══ SECTION 3 ════════════════════════════════════════════ -->
 <div id="s3" class="section-panel">
   <div class="section-header">
     <div class="section-title">
       <h2>Market Efficiency &amp; Zero-Click Trends</h2>
-      <p id="s3-sub">Dead-end keywords, SERP feature absorption &amp; rising SOV players · UK · Jan 2026</p>
+      <p id="s3-sub">Dead-end keywords, SERP feature absorption &amp; rising SOV players · 🇬🇧 UK · Jan 2026</p>
     </div>
     <div class="week-badge">Jan 2026</div>
   </div>
 
   <div class="insight-row">
-    <div class="insight-card red"><div class="insight-label">High Zero-Click Terms (&gt;70%)</div><div class="insight-value red">14</div><div class="insight-sub">keywords where SERP absorbs majority of clicks</div></div>
-    <div class="insight-card amber"><div class="insight-label">AI Overview Presence</div><div class="insight-value amber">8</div><div class="insight-sub">priority keywords now feature AI answers</div></div>
-    <div class="insight-card teal"><div class="insight-label">Deprioritise for PPC</div><div class="insight-value teal">9</div><div class="insight-sub">SERP features absorbing clicks — low ROI paid targets</div></div>
-    <div class="insight-card purple"><div class="insight-label">Rising Disruptors</div><div class="insight-value purple">4</div><div class="insight-sub">brands gaining paid SOV fast in the category</div></div>
+    <div class="insight-card red">
+      <div class="insight-label">High Zero-Click Terms (&gt;70%)</div>
+      <div class="insight-value red">14</div>
+      <div class="insight-sub">keywords where SERP absorbs majority of clicks</div>
+    </div>
+    <div class="insight-card amber">
+      <div class="insight-label">AI Overview Presence</div>
+      <div class="insight-value" style="color:var(--sw-amber)">8</div>
+      <div class="insight-sub">priority keywords now feature AI answers</div>
+    </div>
+    <div class="insight-card green">
+      <div class="insight-label">Deprioritise for PPC</div>
+      <div class="insight-value green">9</div>
+      <div class="insight-sub">SERP features absorbing clicks — low ROI paid targets</div>
+    </div>
+    <div class="insight-card cobalt">
+      <div class="insight-label">Rising Disruptors</div>
+      <div class="insight-value cobalt">4</div>
+      <div class="insight-sub">brands gaining paid SOV fast in the category</div>
+    </div>
   </div>
 
   <div class="view-tabs">
     <div class="view-tab active" onclick="showView('s3v1', this)">Zero-Click Analysis</div>
-    <div class="view-tab" onclick="showView('s3v2', this)">📈 Rising Paid SOV</div>
+    <div class="view-tab" onclick="showView('s3v2', this)">Rising Paid SOV</div>
   </div>
 
+  <!-- Zero-Click View -->
   <div id="s3v1" class="view-sub active">
     <div class="table-wrap">
-      <div class="table-header"><h3>Zero-Click &amp; SERP Feature Absorption — Key Gymshark Terms</h3><div class="table-count">Ranked by zero-click %</div></div>
-      <div style="padding: 12px 16px;">
-        <div style="display: grid; grid-template-columns: 180px 1fr 90px 60px; gap: 12px; padding: 0 0 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gs-muted);">
-          <span>Keyword</span><span>Click absorption (paid / organic)</span><span>Zero-click %</span><span>PPC?</span>
+      <div class="table-header">
+        <h3>Zero-Click &amp; SERP Feature Absorption — Key Gymshark Terms</h3>
+        <div class="table-count">Ranked by zero-click %</div>
+      </div>
+      <div style="padding:12px 16px;">
+        <div class="zero-col-head">
+          <span>Keyword</span><span>Click absorption (zero / organic)</span><span>Zero-click %</span><span>PPC?</span>
         </div>
-        <div class="kw-zero-grid" id="zero-click-list-uk"></div>
-        <div class="kw-zero-grid" id="zero-click-list-us" style="display:none;"></div>
+        <div id="zero-click-list-uk"></div>
+        <div id="zero-click-list-us" style="display:none;"></div>
       </div>
     </div>
     <div class="action-grid">
-      <div class="action-card"><div class="action-icon icon-red">🚫</div><div class="action-content"><h4>Pause PPC on Informational Zero-Click Terms</h4><p>"Face pulls", "rear delt exercises", "best bicep exercises" — 67–83% zero-click. These drive brand awareness via SEO but paid clicks don't convert. Redirect budget to commercial terms.</p></div></div>
-      <div class="action-card"><div class="action-icon icon-amber">🤖</div><div class="action-content"><h4>AI Overview Structured Content Strategy</h4><p>8 key terms now show AI Overviews. Ensure how-to content uses structured FAQ schema and clear step-by-step headings to improve chances of AI Overview inclusion.</p></div></div>
-      <div class="action-card"><div class="action-icon icon-teal">💎</div><div class="action-content"><h4>Double Down on Low Zero-Click Commercial Terms</h4><p>"Gym shorts" (35%), "gym joggers" (38%), "flared leggings" (47%) — these are click-rich commercial terms where paid ROI is strongest. Increase bids here.</p></div></div>
+      <div class="action-card">
+        <div class="action-icon icon-red">🚫</div>
+        <div class="action-content">
+          <h4>Pause PPC on Informational Zero-Click Terms</h4>
+          <p>"Face pulls", "rear delt exercises", "best bicep exercises" — 67–83% zero-click. These drive brand awareness via SEO but paid clicks don't convert. Redirect budget to commercial terms.</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-icon icon-orange">🤖</div>
+        <div class="action-content">
+          <h4>AI Overview Structured Content Strategy</h4>
+          <p>8 key terms now show AI Overviews. Ensure how-to content uses structured FAQ schema and clear step-by-step headings to improve chances of AI Overview inclusion.</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-icon icon-cobalt">💎</div>
+        <div class="action-content">
+          <h4>Double Down on Low Zero-Click Commercial Terms</h4>
+          <p>"Gym shorts" (35%), "gym joggers" (38%), "flared leggings" (47%) — these are click-rich commercial terms where paid ROI is strongest. Increase bids here.</p>
+        </div>
+      </div>
+    </div>
+    <div class="insights-box">
+      <div class="insights-header">Insights</div>
+      <ul class="insights-list">
+        <li data-n="1"><span>Informational workout content (rear delt, face pulls) has <strong>80%+ zero-click rates</strong> — organic value remains for brand exposure but paid ROI is negligible.</span></li>
+        <li data-n="2"><span>AI Overviews have expanded to 8 Gymshark-relevant terms in Jan 2026 — content structured for AI inclusion should be a Q1 SEO priority.</span></li>
+        <li data-n="3"><span>Commercial terms like "flared leggings" and "gym shorts" maintain 35–50% click-through rates — highest paid ROI opportunity in the portfolio.</span></li>
+      </ul>
     </div>
   </div>
 
+  <!-- Rising SOV View -->
   <div id="s3v2" class="view-sub">
     <div class="table-wrap">
-      <div class="table-header"><h3 id="rising-title-uk">Rising Paid SOV — UK Category Disruptors (MoM)</h3><h3 id="rising-title-us" style="display:none;">Rising Paid SOV — US Category Disruptors (MoM)</h3><div class="table-count">Sorted by SOV gain</div></div>
-      <div style="padding: 12px 16px;" id="rising-list-uk"></div>
-      <div style="padding: 12px 16px; display:none;" id="rising-list-us"></div>
+      <div class="table-header">
+        <h3 id="rising-title-uk">Rising Paid SOV — UK Category Disruptors (MoM)</h3>
+        <h3 id="rising-title-us" style="display:none;">Rising Paid SOV — US Category Disruptors (MoM)</h3>
+        <div class="table-count">Sorted by SOV gain</div>
+      </div>
+      <div style="padding:12px 16px;" id="rising-list-uk"></div>
+      <div style="padding:12px 16px; display:none;" id="rising-list-us"></div>
     </div>
     <div class="action-grid">
-      <div class="action-card"><div class="action-icon icon-purple">👀</div><div class="action-content"><h4>Monitor Adanola &amp; AYBL Weekly</h4><p>Both brands are aggressively scaling paid SOV on brand-adjacent terms. Gymshark already bids on their brand terms — review match types and creative rotation monthly.</p></div></div>
-      <div class="action-card"><div class="action-icon icon-amber">📊</div><div class="action-content"><h4>Disruptor Keyword Harvesting</h4><p>Rising disruptors surface new intent patterns. "Pilates socks", "halara leggings", "modest gym wear" are new category signals to monitor and test in Gymshark campaigns.</p></div></div>
+      <div class="action-card">
+        <div class="action-icon icon-cobalt">👀</div>
+        <div class="action-content">
+          <h4>Monitor Adanola &amp; AYBL Weekly</h4>
+          <p>Both brands are aggressively scaling paid SOV on brand-adjacent terms. Gymshark already bids on their brand terms — review match types and creative rotation monthly.</p>
+        </div>
+      </div>
+      <div class="action-card">
+        <div class="action-icon icon-orange">📊</div>
+        <div class="action-content">
+          <h4>Disruptor Keyword Harvesting</h4>
+          <p>Rising disruptors surface new intent patterns. "Pilates socks", "halara leggings", "modest gym wear" are new category signals to monitor and test in Gymshark campaigns.</p>
+        </div>
+      </div>
+    </div>
+    <div class="insights-box">
+      <div class="insights-header">Insights</div>
+      <ul class="insights-list">
+        <li data-n="1"><span><strong>Adanola +18pp SOV MoM</strong> is the single biggest disruptor signal in UK paid search — its brand search volume has crossed 163K/mo.</span></li>
+        <li data-n="2"><span>AYBL and Oner Active represent the influencer-native brand cohort that competes directly with Gymshark's core audience in paid channels.</span></li>
+        <li data-n="3"><span>US data shows Alo Yoga +22pp — premium positioning is winning in paid; Gymshark may need to test aspirational creative angles to defend AOV.</span></li>
+      </ul>
     </div>
   </div>
 </div>
 
-<div class="footnote">
-  <span class="dot"></span>
-  Data source: Similarweb Search Intelligence (live MCP) &nbsp;·&nbsp; Last refreshed: Jan 31, 2026 &nbsp;·&nbsp; Organic &amp; Paid data: non-branded keywords, total web, monthly granularity &nbsp;·&nbsp; <strong>Powered by Similarweb Advisory Services</strong>
+<!-- FOOTER -->
+<div class="dash-footer">
+  <div class="breadcrumb">
+    Advisory Services &rsaquo; <span class="link">Gymshark</span> &rsaquo; <span class="link">Search Intelligence</span>
+    &nbsp;·&nbsp; Data source: Similarweb Search Intelligence (live MCP) &nbsp;·&nbsp; Last refreshed: Jan 31, 2026
+  </div>
+  <div class="footer-right">Business Proprietary &amp; Confidential &nbsp;|&nbsp; Powered by Similarweb Advisory Services</div>
 </div>
 
 </main>
-</div>
 
 <script>
+/* ─── DATA ─────────────────────────────────────────────── */
 const DATA = {
   uk: {
     organic: [
@@ -810,6 +1321,13 @@ const DATA = {
       { keyword: "modest gym wear", pos: 2, volume: 3340, cpc: 0.95, zero: 0.494, serp: ["pla","paid","paid_sitelinks"] },
       { keyword: "gym sets", pos: 4, volume: 16240, cpc: 1.11, zero: 0.605, serp: ["pla","paid","paid_sitelinks"] },
       { keyword: "upper chest exercises", pos: 2, volume: 2220, cpc: 0.70, zero: 0.823, serp: ["ai_overview"] },
+      { keyword: "gym shorts", pos: 1, volume: 6880, cpc: 1.11, zero: 0.651, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "gym joggers", pos: 1, volume: 4900, cpc: 1.07, zero: 0.614, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "sports bra", pos: 1, volume: 11680, cpc: 0.99, zero: 0.727, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "lululemon uk", pos: 1, volume: 21970, cpc: 1.90, zero: 0.288, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "leggings", pos: 1, volume: 13120, cpc: 1.84, zero: 0.737, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "gym", pos: 1, volume: 133520, cpc: 1.04, zero: 0.779, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "lifting straps", pos: 1, volume: 15800, cpc: 0.84, zero: 0.718, serp: ["pla","paid","paid_sitelinks"] },
     ],
     paid: [
       { keyword: "dfyne", pos: 1, volume: 77980, cpc: 0.53, zero: 0.218, serp: ["pla","paid","paid_sitelinks"] },
@@ -818,16 +1336,17 @@ const DATA = {
       { keyword: "adanola", pos: 1, volume: 162960, cpc: 0.48, zero: 0.307, serp: ["pla","paid","paid_sitelinks"] },
       { keyword: "gym bag", pos: 1, volume: 25720, cpc: 0.91, zero: 0.677, serp: ["pla","paid"] },
       { keyword: "tala", pos: 1, volume: 94660, cpc: 0.31, zero: 0.387, serp: ["pla","paid","paid_sitelinks"] },
-      { keyword: "gym shorts", pos: 1, volume: 6880, cpc: 1.11, zero: 0.651, serp: ["pla","paid","paid_sitelinks"] },
-      { keyword: "gym joggers", pos: 1, volume: 4900, cpc: 1.07, zero: 0.614, serp: ["pla","paid","paid_sitelinks"] },
-      { keyword: "sports bra", pos: 1, volume: 11680, cpc: 0.99, zero: 0.727, serp: ["pla","paid","paid_sitelinks"] },
-      { keyword: "flared leggings", pos: 1, volume: 12640, cpc: 1.43, zero: 0.674, serp: ["pla","paid","paid_sitelinks"] },
-      { keyword: "lululemon uk", pos: 1, volume: 21970, cpc: 1.90, zero: 0.288, serp: ["pla","paid","paid_sitelinks"] },
       { keyword: "leggings", pos: 1, volume: 13120, cpc: 1.84, zero: 0.737, serp: ["pla","paid","paid_sitelinks"] },
       { keyword: "gym sets", pos: 1, volume: 16240, cpc: 1.11, zero: 0.605, serp: ["pla","paid"] },
-      { keyword: "gym", pos: 1, volume: 133520, cpc: 1.04, zero: 0.779, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "sports bra", pos: 1, volume: 11680, cpc: 0.99, zero: 0.727, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "gym shorts", pos: 1, volume: 6880, cpc: 1.11, zero: 0.651, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "lululemon uk", pos: 1, volume: 21970, cpc: 1.90, zero: 0.288, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "flared leggings", pos: 1, volume: 12640, cpc: 1.43, zero: 0.674, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "gym joggers", pos: 1, volume: 4900, cpc: 1.07, zero: 0.614, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "abyl", pos: 1, volume: 14020, cpc: 0.37, zero: 0.244, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "gymking", pos: 1, volume: 11570, cpc: 0.22, zero: 0.331, serp: ["pla","paid","paid_sitelinks"] },
+      { keyword: "youngla uk", pos: 1, volume: 5200, cpc: 0.59, zero: 0.298, serp: ["pla","paid","paid_sitelinks"] },
       { keyword: "modest gym wear", pos: 1, volume: 3340, cpc: 0.95, zero: 0.494, serp: ["pla","paid","paid_sitelinks"] },
-      { keyword: "lifting straps", pos: 1, volume: 15800, cpc: 0.84, zero: 0.718, serp: ["pla","paid","paid_sitelinks"] },
     ]
   },
   us: {
@@ -864,73 +1383,77 @@ const DATA = {
 
 const COMP_DATA = {
   lululemon: { name: "Lululemon", pages: [
-    { url: "eu.lululemon.com/en-lu/home", share: 63.0, keyword: "lulu lemon", spend: "£2,906" },
-    { url: "eu.lululemon.com/c/winter-sale", share: 3.9, keyword: "lulu lemon", spend: "n/a" },
-    { url: "shop.lululemon.com/c/men-puffer-jackets", share: 2.5, keyword: "under armour rain gear", spend: "£234" },
-    { url: "eu.lululemon.com/en-lu/email/sign-up.html", share: 2.3, keyword: "lulu lemon", spend: "£108" },
-    { url: "eu.lululemon.com/p/abc-slim-fit-trouser", share: 1.8, keyword: "lululemon abc pants", spend: "£60" },
-    { url: "eu.lululemon.com/c/accessories/running", share: 1.7, keyword: "lulu lemon", spend: "£89" },
-    { url: "shop.lululemon.com/p/waterproof-jacket", share: 1.1, keyword: "raincoat", spend: "£145" },
-    { url: "eu.lululemon.com/p/align-high-rise-short", share: 0.9, keyword: "gymshark", spend: "£13" },
-    { url: "eu.lululemon.com/p/align-super-high-rise-pant", share: 0.9, keyword: "gymshark", spend: "£13" },
-    { url: "eu.lululemon.com/c/womens-running", share: 0.7, keyword: "lulu lemon", spend: "£74" }
+    { url: "eu.lululemon.com/en-lu/home", share: 63.0, keyword: "lulu lemon" },
+    { url: "eu.lululemon.com/c/winter-sale", share: 3.9, keyword: "lulu lemon" },
+    { url: "shop.lululemon.com/c/men-puffer-jackets", share: 2.5, keyword: "under armour rain gear" },
+    { url: "eu.lululemon.com/en-lu/email/sign-up.html", share: 2.3, keyword: "lulu lemon" },
+    { url: "eu.lululemon.com/p/abc-slim-fit-trouser", share: 1.8, keyword: "lululemon abc pants" },
+    { url: "eu.lululemon.com/c/accessories/running", share: 1.7, keyword: "lulu lemon" },
+    { url: "shop.lululemon.com/p/waterproof-jacket", share: 1.1, keyword: "raincoat" },
+    { url: "eu.lululemon.com/p/align-high-rise-short", share: 0.9, keyword: "gymshark" },
+    { url: "eu.lululemon.com/p/align-super-high-rise-pant", share: 0.9, keyword: "gymshark" },
+    { url: "eu.lululemon.com/c/womens-running", share: 0.7, keyword: "lulu lemon" }
   ], creative: [
     { theme: "The Long Haul", copy: "'Built to outlast. Shop the ABC Pant — the only trouser you need.'", type: "Product Focus" },
     { theme: "Year of Running", copy: "'Your fastest year starts now. New running collection — free delivery.'", type: "Seasonal Push" },
     { theme: "Brand Defence", copy: "'The original. Premium activewear. Feel the difference.'", type: "Competitor Counter" },
     { theme: "Membership Value", copy: "'Join lululemon Studio. 10,000+ classes, 1 membership.'", type: "Retention" },
   ], channels: { text: 45, shopping: 40, display: 15 } },
+
   sweaty_betty: { name: "Sweaty Betty", pages: [
-    { url: "sweatybetty.com/collections/leggings", share: 28.0, keyword: "gym leggings women", spend: "est." },
-    { url: "sweatybetty.com/collections/sports-bras", share: 14.0, keyword: "sports bra uk", spend: "est." },
-    { url: "sweatybetty.com/pages/sale", share: 12.0, keyword: "sweaty betty sale", spend: "est." },
-    { url: "sweatybetty.com/collections/running", share: 10.0, keyword: "women running clothes", spend: "est." },
-    { url: "sweatybetty.com/collections/yoga", share: 9.0, keyword: "yoga leggings", spend: "est." },
-    { url: "sweatybetty.com/", share: 8.0, keyword: "sweaty betty", spend: "est." },
-    { url: "sweatybetty.com/collections/shorts", share: 6.0, keyword: "gym shorts women", spend: "est." },
-    { url: "sweatybetty.com/collections/jackets", share: 5.0, keyword: "running jacket women", spend: "est." },
-    { url: "sweatybetty.com/collections/sets", share: 4.5, keyword: "matching gym set", spend: "est." },
-    { url: "sweatybetty.com/collections/base-layer", share: 3.5, keyword: "base layer women", spend: "est." },
+    { url: "sweatybetty.com/collections/leggings", share: 28.0, keyword: "gym leggings women" },
+    { url: "sweatybetty.com/collections/sports-bras", share: 14.0, keyword: "sports bra uk" },
+    { url: "sweatybetty.com/pages/sale", share: 12.0, keyword: "sweaty betty sale" },
+    { url: "sweatybetty.com/collections/running", share: 10.0, keyword: "women running clothes" },
+    { url: "sweatybetty.com/collections/yoga", share: 9.0, keyword: "yoga leggings" },
+    { url: "sweatybetty.com/", share: 8.0, keyword: "sweaty betty" },
+    { url: "sweatybetty.com/collections/shorts", share: 6.0, keyword: "gym shorts women" },
+    { url: "sweatybetty.com/collections/jackets", share: 5.0, keyword: "running jacket women" },
+    { url: "sweatybetty.com/collections/sets", share: 4.5, keyword: "matching gym set" },
+    { url: "sweatybetty.com/collections/base-layer", share: 3.5, keyword: "base layer women" },
   ], creative: [
     { theme: "Fit For All", copy: "'Size-inclusive activewear, designed for real movement.'", type: "Inclusivity" },
     { theme: "Sale Push", copy: "'Up to 50% off. Limited time — sport your best, spend less.'", type: "Price Promo" },
     { theme: "Feel-Good Fitness", copy: "'Leggings that move with you. From yoga to sprint sessions.'", type: "Lifestyle" },
   ], channels: { text: 38, shopping: 45, display: 17 } },
+
   nike: { name: "Nike", pages: [
-    { url: "nike.com/gb/w/womens-training", share: 22.0, keyword: "women training clothes", spend: "est." },
-    { url: "nike.com/gb/w/running-shoes", share: 18.0, keyword: "running shoes uk", spend: "est." },
-    { url: "nike.com/gb/w/mens-gym", share: 12.0, keyword: "mens gym clothes", spend: "est." },
-    { url: "nike.com/gb/sale", share: 11.0, keyword: "nike sale", spend: "est." },
-    { url: "nike.com/gb/w/leggings", share: 9.0, keyword: "nike leggings", spend: "est." },
-    { url: "nike.com/gb/w/sport-bras", share: 7.0, keyword: "sports bra nike", spend: "est." },
-    { url: "nike.com/gb/w/shorts", share: 6.0, keyword: "nike shorts", spend: "est." },
-    { url: "nike.com/gb/", share: 5.0, keyword: "nike uk", spend: "est." },
-    { url: "nike.com/gb/w/shoes", share: 4.5, keyword: "nike trainers", spend: "est." },
-    { url: "nike.com/gb/w/hoodies", share: 3.0, keyword: "nike hoodie", spend: "est." },
+    { url: "nike.com/gb/w/womens-training", share: 22.0, keyword: "women training clothes" },
+    { url: "nike.com/gb/w/running-shoes", share: 18.0, keyword: "running shoes uk" },
+    { url: "nike.com/gb/w/mens-gym", share: 12.0, keyword: "mens gym clothes" },
+    { url: "nike.com/gb/sale", share: 11.0, keyword: "nike sale" },
+    { url: "nike.com/gb/w/leggings", share: 9.0, keyword: "nike leggings" },
+    { url: "nike.com/gb/w/sport-bras", share: 7.0, keyword: "sports bra nike" },
+    { url: "nike.com/gb/w/shorts", share: 6.0, keyword: "nike shorts" },
+    { url: "nike.com/gb/", share: 5.0, keyword: "nike uk" },
+    { url: "nike.com/gb/w/shoes", share: 4.5, keyword: "nike trainers" },
+    { url: "nike.com/gb/w/hoodies", share: 3.0, keyword: "nike hoodie" },
   ], creative: [
     { theme: "Just Do It — 2026", copy: "'Wear the proof. New season performance gear, now live.'", type: "Brand Campaign" },
     { theme: "Air Max Season", copy: "'The icon returns. Air Max 97 — Limited restock.'", type: "Product Launch" },
     { theme: "PLA Dominance", copy: "Heavy Shopping ads across all major apparel categories.", type: "Shopping / PLA" },
   ], channels: { text: 25, shopping: 60, display: 15 } },
+
   adanola: { name: "Adanola", pages: [
-    { url: "adanola.com/collections/leggings", share: 35.0, keyword: "adanola leggings", spend: "est." },
-    { url: "adanola.com/", share: 28.0, keyword: "adanola", spend: "est." },
-    { url: "adanola.com/collections/sets", share: 15.0, keyword: "adanola set", spend: "est." },
-    { url: "adanola.com/collections/oversized", share: 10.0, keyword: "oversized gym wear", spend: "est." },
-    { url: "adanola.com/collections/sale", share: 8.0, keyword: "adanola sale", spend: "est." },
-    { url: "adanola.com/collections/shorts", share: 4.0, keyword: "gym shorts women", spend: "est." },
+    { url: "adanola.com/collections/leggings", share: 35.0, keyword: "adanola leggings" },
+    { url: "adanola.com/", share: 28.0, keyword: "adanola" },
+    { url: "adanola.com/collections/sets", share: 15.0, keyword: "adanola set" },
+    { url: "adanola.com/collections/oversized", share: 10.0, keyword: "oversized gym wear" },
+    { url: "adanola.com/collections/sale", share: 8.0, keyword: "adanola sale" },
+    { url: "adanola.com/collections/shorts", share: 4.0, keyword: "gym shorts women" },
   ], creative: [
     { theme: "Minimalist Aesthetic", copy: "'Clean lines. Premium fabrics. Effortless gym-to-street.'", type: "Brand Identity" },
     { theme: "Influencer Driven", copy: "'As seen everywhere. Shop the legging that broke the internet.'", type: "Social Proof" },
     { theme: "New Arrivals Push", copy: "'Fresh drops, weekly. Be first. Sign up for early access.'", type: "CRM/Lead Gen" },
   ], channels: { text: 55, shopping: 30, display: 15 } },
+
   fabletics: { name: "Fabletics", pages: [
-    { url: "fabletics.co.uk/collections/leggings", share: 30.0, keyword: "fabletics leggings", spend: "est." },
-    { url: "fabletics.co.uk/", share: 25.0, keyword: "fabletics", spend: "est." },
-    { url: "fabletics.co.uk/pages/membership", share: 18.0, keyword: "fabletics membership", spend: "est." },
-    { url: "fabletics.co.uk/collections/sale", share: 12.0, keyword: "fabletics sale", spend: "est." },
-    { url: "fabletics.co.uk/collections/sports-bras", share: 8.0, keyword: "sports bra uk", spend: "est." },
-    { url: "fabletics.co.uk/collections/sets", share: 7.0, keyword: "matching gym set", spend: "est." },
+    { url: "fabletics.co.uk/collections/leggings", share: 30.0, keyword: "fabletics leggings" },
+    { url: "fabletics.co.uk/", share: 25.0, keyword: "fabletics" },
+    { url: "fabletics.co.uk/pages/membership", share: 18.0, keyword: "fabletics membership" },
+    { url: "fabletics.co.uk/collections/sale", share: 12.0, keyword: "fabletics sale" },
+    { url: "fabletics.co.uk/collections/sports-bras", share: 8.0, keyword: "sports bra uk" },
+    { url: "fabletics.co.uk/collections/sets", share: 7.0, keyword: "matching gym set" },
   ], creative: [
     { theme: "2 for £24 Offer", copy: "'2 leggings for £24 — VIP members only. Claim yours today.'", type: "Price Promo" },
     { theme: "Membership Upsell", copy: "'Join VIP. 50% off every single item, every month.'", type: "Membership" },
@@ -1009,40 +1532,7 @@ const BLIND_DATA = {
 let currentRegion = 'uk';
 let selectedComp = 'lululemon';
 
-function setRegion(region, btn) {
-  currentRegion = region;
-  document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const rl = region === 'uk' ? '🇬🇧 UK' : '🇺🇸 US';
-  document.getElementById('s1-sub').textContent = `Identifying cannibalization, coverage gaps & competitor blind spots · ${rl} · Jan 2026`;
-  document.getElementById('s2-sub').textContent = `Spend allocation, top paid landing pages & ad creative signals · ${rl} · Jan 2026`;
-  document.getElementById('s3-sub').textContent = `Dead-end keywords, SERP feature absorption & rising SOV players · ${rl} · Jan 2026`;
-  document.getElementById('s1-metrics-uk').style.display = region === 'uk' ? 'grid' : 'none';
-  document.getElementById('s1-metrics-us').style.display = region === 'us' ? 'grid' : 'none';
-  document.getElementById('rising-title-uk').style.display = region === 'uk' ? 'block' : 'none';
-  document.getElementById('rising-title-us').style.display = region === 'us' ? 'block' : 'none';
-  document.getElementById('rising-list-uk').style.display = region === 'uk' ? 'block' : 'none';
-  document.getElementById('rising-list-us').style.display = region === 'us' ? 'block' : 'none';
-  document.getElementById('zero-click-list-uk').style.display = region === 'uk' ? 'flex' : 'none';
-  document.getElementById('zero-click-list-us').style.display = region === 'us' ? 'flex' : 'none';
-  buildAll();
-}
-
-function showSection(id, tab) {
-  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  tab.classList.add('active');
-}
-
-function showView(id, tab) {
-  const section = tab.closest('.section-panel');
-  section.querySelectorAll('.view-sub').forEach(s => s.classList.remove('active'));
-  tab.closest('.view-tabs').querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  tab.classList.add('active');
-}
-
+/* ─── HELPERS ─────────────────────────────────────────────── */
 function posPill(pos) {
   if (!pos) return '<span class="pos-pill pos-low">—</span>';
   const cls = pos <= 1 ? 'pos-1' : pos <= 2 ? 'pos-2' : pos <= 3 ? 'pos-3' : pos <= 10 ? 'pos-mid' : 'pos-low';
@@ -1050,7 +1540,7 @@ function posPill(pos) {
 }
 
 function zeroBar(pct) {
-  const cls = pct >= 0.7 ? 'bar-red' : pct >= 0.5 ? 'bar-amber' : 'bar-teal';
+  const cls = pct >= 0.7 ? 'bar-negative' : pct >= 0.5 ? 'bar-amber' : 'bar-positive';
   const txt = pct >= 0.7 ? 'pct-high' : pct >= 0.5 ? 'pct-mid' : 'pct-low';
   return `<div class="zero-bar"><div class="bar-track"><div class="bar-fill ${cls}" style="width:${Math.round(pct*100)}%"></div></div><span class="kw-zero-pct ${txt}">${Math.round(pct*100)}%</span></div>`;
 }
@@ -1063,6 +1553,7 @@ function serpBadges(features) {
 function fmtNum(n) { return n >= 1000 ? (n/1000).toFixed(0)+'K' : n; }
 const curr = () => currentRegion === 'uk' ? '£' : '$';
 
+/* ─── BUILDERS ────────────────────────────────────────────── */
 function buildCannibalization() {
   const organic = DATA[currentRegion].organic;
   const paidKws = new Set(DATA[currentRegion].paid.map(k => k.keyword));
@@ -1082,9 +1573,9 @@ function buildGap() {
   document.getElementById('gap-count').textContent = rows.length + ' keywords';
   document.getElementById('gap-body').innerHTML = rows.map(k => {
     const op = organicMap[k.keyword] || '20+';
-    const pri = k.volume > 10000 ? `<span class="tag tag-gap">🔥 High</span>` : k.volume > 3000 ? `<span class="tag tag-save">Medium</span>` : `<span class="tag">Low</span>`;
+    const pri = k.volume > 10000 ? `<span class="tag tag-cannibal">High</span>` : k.volume > 3000 ? `<span class="tag tag-gap">Medium</span>` : `<span class="tag" style="background:rgba(9,37,64,0.06);color:var(--sw-gray)">Low</span>`;
     const intent = k.zero < 0.5 ? 'Transactional' : k.zero < 0.65 ? 'Commercial' : 'Informational';
-    return `<tr><td><span class="kw-text">${k.keyword}</span></td><td>${posPill(op)}</td><td>${fmtNum(k.volume)}</td><td>${curr()}${k.cpc.toFixed(2)}</td><td><span style="font-size:12px;color:var(--gs-muted)">${intent}</span></td><td>${serpBadges(k.serp)}</td><td>${pri}</td></tr>`;
+    return `<tr><td><span class="kw-text">${k.keyword}</span></td><td>${posPill(op)}</td><td>${fmtNum(k.volume)}</td><td>${curr()}${k.cpc.toFixed(2)}</td><td><span style="font-size:11px;color:var(--sw-gray)">${intent}</span></td><td>${serpBadges(k.serp)}</td><td>${pri}</td></tr>`;
   }).join('');
 }
 
@@ -1092,32 +1583,33 @@ function buildBlind() {
   const rows = BLIND_DATA[currentRegion];
   document.getElementById('blind-count').textContent = rows.length + ' terms';
   document.getElementById('blind-body').innerHTML = rows.map(b => {
-    const opp = b.vol > 20000 ? `<span class="tag tag-blind">🔥 Priority</span>` : b.vol > 5000 ? `<span class="tag tag-gap">Medium</span>` : `<span class="tag">Monitor</span>`;
-    return `<tr><td><span class="kw-text">${b.kw}</span></td><td><strong>${b.competitor}</strong></td><td>${posPill(b.comp_pos)}</td><td>${fmtNum(b.vol)}</td><td>${curr()}${b.cpc.toFixed(2)}</td><td><span style="font-size:11px;color:var(--gs-muted)">${b.status}</span></td><td>${opp}</td></tr>`;
+    const opp = b.vol > 20000 ? `<span class="tag tag-cannibal">Priority</span>` : b.vol > 5000 ? `<span class="tag tag-gap">Medium</span>` : `<span class="tag" style="background:rgba(9,37,64,0.06);color:var(--sw-gray)">Monitor</span>`;
+    return `<tr><td><span class="kw-text">${b.kw}</span></td><td><strong>${b.competitor}</strong></td><td>${posPill(b.comp_pos)}</td><td>${fmtNum(b.vol)}</td><td>${curr()}${b.cpc.toFixed(2)}</td><td><span style="font-size:11px;color:var(--sw-gray)">${b.status}</span></td><td>${opp}</td></tr>`;
   }).join('');
 }
 
 function buildZeroClick() {
   const data = (currentRegion === 'uk' ? ZERO_CLICK_UK : ZERO_CLICK_US).sort((a,b) => b.zero - a.zero);
-  const el = document.getElementById(`zero-click-list-${currentRegion}`);
-  el.style.display = 'flex';
-  el.style.flexDirection = 'column';
-  el.style.gap = '8px';
+  const elId = `zero-click-list-${currentRegion}`;
+  const el = document.getElementById(elId);
+  el.style.display = 'block';
   el.innerHTML = data.map(k => {
     const paidPct = k.ppc ? Math.max(0, 0.85 - k.zero) : 0;
-    const orgPct = 1 - k.zero - paidPct;
-    const ppcLabel = k.ppc ? '<span class="tag tag-cannibal" style="font-size:9px;">Pause?</span>' : '<span style="font-size:11px;color:var(--gs-muted);">—</span>';
+    const orgPct = Math.max(0, 1 - k.zero - paidPct);
+    const ppcLabel = k.ppc
+      ? `<span class="tag tag-cannibal" style="font-size:9px;">Pause?</span>`
+      : `<span style="font-size:11px;color:var(--sw-gray);">—</span>`;
     const zCls = k.zero >= 0.7 ? 'pct-high' : k.zero >= 0.5 ? 'pct-mid' : 'pct-low';
     return `<div class="kw-zero-item">
       <span class="kw-zero-name">${k.kw}</span>
-      <div style="display:flex;flex-direction:column;gap:2px;">
-        <div style="display:flex;align-items:center;gap:4px;font-size:10px;">
-          <span style="width:50px;color:var(--gs-red);font-family:'IBM Plex Mono',monospace">Zero ${Math.round(k.zero*100)}%</span>
-          <div class="bar-track" style="max-width:none;flex:1;"><div class="bar-fill bar-red" style="width:${Math.round(k.zero*100)}%"></div></div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <div style="display:flex;align-items:center;gap:5px;font-size:10px;">
+          <span style="width:56px;color:var(--sw-negative);font-size:10px;font-weight:600;">Zero ${Math.round(k.zero*100)}%</span>
+          <div class="bar-track" style="max-width:none;flex:1;"><div class="bar-fill bar-negative" style="width:${Math.round(k.zero*100)}%"></div></div>
         </div>
-        <div style="display:flex;align-items:center;gap:4px;font-size:10px;">
-          <span style="width:50px;color:var(--gs-blue);font-family:'IBM Plex Mono',monospace">Organic</span>
-          <div class="bar-track" style="max-width:none;flex:1;"><div class="bar-fill" style="width:${Math.round(orgPct*100)}%;background:var(--gs-blue)"></div></div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:10px;">
+          <span style="width:56px;color:var(--sw-cobalt);font-size:10px;font-weight:600;">Organic</span>
+          <div class="bar-track" style="max-width:none;flex:1;"><div class="bar-fill bar-cobalt" style="width:${Math.round(orgPct*100)}%"></div></div>
         </div>
       </div>
       <span class="kw-zero-pct ${zCls}">${Math.round(k.zero*100)}%</span>
@@ -1137,21 +1629,14 @@ function buildRising() {
         <div class="rising-kw">${r.note}</div>
       </div>
       <div style="text-align:right;margin-right:8px;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gs-muted)">Top term: <span style="color:var(--gs-white)">${r.topKw}</span></div>
-        <div style="font-size:10px;color:var(--gs-muted);font-family:'IBM Plex Mono',monospace">Vol ${r.vol}</div>
+        <div style="font-size:10px;color:var(--sw-gray)">Top term: <span style="color:var(--sw-ink);font-weight:600">${r.topKw}</span></div>
+        <div style="font-size:10px;color:var(--sw-gray)">Vol: ${r.vol}</div>
       </div>
       <div style="text-align:right;flex-shrink:0;">
         <div class="rising-change">${r.sovGain}</div>
         <div class="rising-vol">SOV MoM</div>
       </div>
     </div>`).join('');
-}
-
-function selectComp(key, tile) {
-  selectedComp = key;
-  document.querySelectorAll('.comp-tile').forEach(t => t.classList.remove('selected'));
-  tile.classList.add('selected');
-  renderCompDetail();
 }
 
 function renderCompDetail() {
@@ -1169,10 +1654,51 @@ function renderCompDetail() {
     </div>`).join('');
   const ch = comp.channels;
   document.getElementById('comp-channel-mix').innerHTML = [
-    {label:'Text Ads', val:ch.text, color:'var(--gs-teal)'},
-    {label:'Shopping / PLA', val:ch.shopping, color:'var(--gs-amber)'},
-    {label:'Display / Video', val:ch.display, color:'var(--gs-purple)'}
+    {label:'Text Ads',      val:ch.text,     color:'var(--sw-cobalt)'},
+    {label:'Shopping / PLA',val:ch.shopping, color:'var(--sw-orange)'},
+    {label:'Display / Video',val:ch.display, color:'var(--sw-dri)'}
   ].map(r => `<div class="ch-row"><div class="ch-label"><span>${r.label}</span><span>${r.val}%</span></div><div class="ch-track"><div class="ch-fill" style="width:${r.val}%;background:${r.color}"></div></div></div>`).join('');
+}
+
+function selectComp(key, tile) {
+  selectedComp = key;
+  document.querySelectorAll('.comp-tile').forEach(t => t.classList.remove('selected'));
+  tile.classList.add('selected');
+  renderCompDetail();
+}
+
+function setRegion(region, btn) {
+  currentRegion = region;
+  document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const rl = region === 'uk' ? '🇬🇧 UK' : '🇺🇸 US';
+  document.getElementById('s1-sub').textContent = `Identifying cannibalization, coverage gaps & competitor blind spots · ${rl} · Jan 2026`;
+  document.getElementById('s2-sub').textContent = `Spend allocation, top paid landing pages & ad creative signals · ${rl} · Jan 2026`;
+  document.getElementById('s3-sub').textContent = `Dead-end keywords, SERP feature absorption & rising SOV players · ${rl} · Jan 2026`;
+  document.getElementById('s1-metrics-uk').style.display = region === 'uk' ? 'grid' : 'none';
+  document.getElementById('s1-metrics-us').style.display = region === 'us' ? 'grid' : 'none';
+  document.getElementById('rising-title-uk').style.display = region === 'uk' ? 'block' : 'none';
+  document.getElementById('rising-title-us').style.display = region === 'us' ? 'block' : 'none';
+  document.getElementById('rising-list-uk').style.display = region === 'uk' ? 'block' : 'none';
+  document.getElementById('rising-list-us').style.display = region === 'us' ? 'block' : 'none';
+  document.getElementById('zero-click-list-uk').style.display = region === 'uk' ? 'block' : 'none';
+  document.getElementById('zero-click-list-us').style.display = region === 'us' ? 'block' : 'none';
+  buildAll();
+}
+
+function showSection(id, tab) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  tab.classList.add('active');
+}
+
+function showView(id, tab) {
+  const section = tab.closest('.section-panel');
+  section.querySelectorAll('.view-sub').forEach(s => s.classList.remove('active'));
+  tab.closest('.view-tabs').querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  tab.classList.add('active');
 }
 
 function simulateRefresh(btn) {
